@@ -21,7 +21,7 @@ import Binder from '../../../global/components/Binder.js.jsx';
 // import resource components
 import FlowLayout from '../components/FlowLayout.js.jsx';
 import TaskForm from '../../task/components/TaskForm.js.jsx';
-
+import TaskListItem from '../../task/components/TaskListItem.js.jsx';
 class SingleFlow extends Binder {
   constructor(props) {
     super(props);
@@ -66,6 +66,7 @@ class SingleFlow extends Binder {
       return e.target.value;
     });
     this.setState({newState});
+   
   }
 
 
@@ -95,7 +96,7 @@ class SingleFlow extends Binder {
       , match
       , taskStore 
     } = this.props;
-
+    
     /**
      * use the selected.getItem() utility to pull the actual flow object from the map
      */
@@ -136,6 +137,7 @@ class SingleFlow extends Binder {
     const isNewTaskEmpty = !task;
 
     return (
+      
       <FlowLayout>
         <h3> Single Flow </h3>
         { isFlowEmpty ?
@@ -153,10 +155,10 @@ class SingleFlow extends Binder {
               <div style={{ opacity: isTaskListFetching ? 0.5 : 1 }}>
                 <ul>
                   {taskListItems.map((task, i) =>
-                    <li key={task._id + i}>
-                      <h3>{task.name}</h3>
-                      <p>{task.description}</p>
-                    </li>
+                    
+                    <TaskListItem
+                    task={task}
+                    />
                   )}
                 </ul>
               </div>

@@ -4,4 +4,73 @@
  * available should live here.
  */
 
-@import "./admin/taskAdminStyles";
+ @import "./admin/taskAdminStyles";
+
+ .content-header {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  
+    .title-description-container {
+      text-align: left;
+  
+      .title {
+        display: flex;
+        align-items: center;
+  
+        h1 {
+          margin-bottom: 0.67em;
+        }
+      }
+    }
+  
+    .btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .yt-btn {
+        &.comment {
+            border-color: rgb(207, 175, 243);
+            color: rgb(81, 52, 248);
+          }
+       }
+    }
+  }
+ 
+ .comment-list {
+   list-style: none;
+   padding: 0;
+ 
+   & > li {
+     display: grid;
+     grid-template-columns: 5% 95%;
+ 
+     .placeholder-wrapper {
+       display: flex;
+       align-items: center;
+       margin: auto;
+ 
+       .placeholder {
+         height: 36px;
+         width: 36px;
+         border-radius: 50%;
+         margin-right: 10px;
+         background-position: center;
+         background-size: cover;
+         background-image: url(/img/defaults/placholder.png);
+       }
+     }
+   }
+ }
+ 
+ .btn-admin-container {
+   margin: 15px 0 25px;
+   .yt-btn {
+     &.approve {
+       margin-right: 30px;
+       background-color: #1bae9f;
+     }
+     &.reject {
+       background-color: #d3455b;
+     }
+   }
+ }

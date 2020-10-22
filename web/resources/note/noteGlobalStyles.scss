@@ -3,3 +3,10 @@
  * Any styles specific to the Note module that you ALSO want globally
  * available should live here.
  */
+
+ .yt-btn {
+    &.comment {
+      border-color: rgb(207, 175, 243);
+      color: rgb(81, 52, 248);
+    }
+  }
