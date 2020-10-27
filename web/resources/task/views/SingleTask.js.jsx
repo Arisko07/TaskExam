@@ -14,6 +14,7 @@ import { Link, withRouter } from 'react-router-dom';
 // import actions
 import * as taskActions from '../taskActions';
 import * as noteActions from '../../note/noteActions'
+import * as userActions from '../../user/userActions'
 
 // import global components
 import Binder from '../../../global/components/Binder.js.jsx';
@@ -44,6 +45,7 @@ class SingleTask extends Binder {
     dispatch(taskActions.fetchSingleIfNeeded(match.params.taskId));
     dispatch(noteActions.fetchDefaultNote());
     dispatch(noteActions.fetchListIfNeeded('_task', match.params.taskId));
+    dispatch(userActions.fetchListIfNeeded());
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,7 +81,6 @@ class SingleTask extends Binder {
     /**
      * This let's us change arbitrarily nested objects with one pass
      */
-    console.log(this.props.loggedInUser)
     let newState = _.update(this.state, e.target.name, () => {
       return e.target.value;
     });
@@ -96,7 +97,7 @@ class SingleTask extends Binder {
       dispatch, 
       match 
     } = this.props;
-
+    
     var noteComment = {...this.state.note};
 
     const selectedTask = taskStore.selected.getItem();
@@ -161,6 +162,11 @@ class SingleTask extends Binder {
 
       return date.toLocaleDateString() + ' @ ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
     }
+    const parseUser = (user) => {
+     
+      return (user.firstName + " " + user.lastName)
+    
+    }
     const isAdmin = (loggedInUser.roles) ? loggedInUser.roles.includes("admin") : false;
 
     return (
@@ -198,7 +204,7 @@ class SingleTask extends Binder {
                         <div className="placeholder"></div>
                       </div>
                       <div>
-                        <h3>{note._user.firstName + " " } {note._user.lastName}</h3>
+                  <h3>{parseUser(userStore.byId[note._user])}</h3>
                         <p>{parseDatetime(note.created)}</p>
                         <p>{note.content}</p>
                       </div>
